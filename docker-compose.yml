@@ -1,0 +1,35 @@
+services:
+  orders:
+    build:
+      context: .
+      dockerfile: ./apps/orders/Dockerfile
+    command: npm run start:dev
+    container_name: orders-service
+    env_file:
+      - ./apps/orders/.env
+    ports:
+      - "3002:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - mongodb-primary
+    environment:
+      MONGODB_URI: mongodb://root:password123@mongodb-primary:27017/orders_db?authSource=admin
+
+  mongodb-primary:
+    image: mongo:latest
+    container_name: mongodb-primary
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+    driver: local

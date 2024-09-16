@@ -1,0 +1,33 @@
+# Node modules and other dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+.git
+.gitignore
+
+# Build output
+dist
+.build
+coverage
+
+# Docker-specific files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# IDE/editor specific files
+.idea
+.vscode
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+#environmental vairables 
+*.env
